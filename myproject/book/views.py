@@ -6,7 +6,7 @@ from .models import Book, Category
 from rest_framework.generics import ListAPIView
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from .tasks import send_email_task
+from .tasks import send_email_task, send_email_task_e
 
 # Create your views here.
 @api_view(['GET'])
@@ -69,4 +69,10 @@ class BookList(ListAPIView):
 def send_email(request):
     email = request.data.get('email')
     send_email_task.delay(email)
+    return Response({"message": "Email sent!"})
+
+@api_view(['POST'])
+def send_email_e(request):
+    email = request.data.get('email')
+    send_email_task_e.delay(email)
     return Response({"message": "Email sent!"})
