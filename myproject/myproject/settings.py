@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'product',
     'book',
     'report',
+    'django_celery_results',
 
 ]
 
@@ -139,3 +140,5 @@ CACHES = {
 }
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True

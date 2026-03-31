@@ -2,7 +2,7 @@ from celery import shared_task
 import time
 from .models import Report
 
-@shared_task(bind=True, max_retries=3)
+@shared_task(bind=True, max_retries=3, name="reports.genrate_report")
 def genrate_report(self, report_id):
     report = Report.objects.get(id=report_id)
     report.status = "PROCESSING"
